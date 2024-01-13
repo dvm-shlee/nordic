@@ -1,15 +1,16 @@
-© 2021 Regents of the University of Minnesota
+# Summary of License Terms for NORDIC and NIFTI_NORDIC Software
 
-NORDIC and NIFTI_NORDIC is copyrighted by Regents of the University of Minnesota and covered by US 10,768,260. 
-Regents of the University of Minnesota will license the use of NORDIC and NIFTI_NORDIC solely for educational 
-and research purposes by non-profit institutions and US government agencies only. For other proposed uses, 
-contact umotc@umn.edu. The software may not be sold or redistributed without prior approval. One may make 
-copies of the software for their use provided that the copies, are not sold or distributed, are used under 
-the same terms and conditions. As unestablished research software, this code is provided on an "as is'' basis
-without warranty of any kind, either expressed or implied. The downloading, or executing any part of this
-software constitutes an implicit agreement to these terms. These terms and conditions are subject to change 
-at any time without prior notice.
+## Original Software License (Regents of the University of Minnesota)
+- Copyright: © 2021 Regents of the University of Minnesota.
+- Patent: Covered by US Patent 10,768,260.
+- Permitted Use: Licensed exclusively for educational and research purposes by non-profit institutions and US government agencies.
+- Restrictions: The software may not be sold, redistributed, or used for commercial purposes without prior approval from the University of Minnesota.
+- Copying: Copies of the software are allowed for personal use, provided they are not sold or distributed and are used under the same terms and conditions.
+- Warranty: The software is provided "as is" without any warranty, either expressed or implied.
+- Agreement: Downloading or executing any part of this software constitutes an agreement to these terms, which are subject to change without notice.
 
----
-
-This software includes modifications made by SungHo Lee (shlee@unc.edu), a faculty member at the University of North Carolina at Chapel Hill. The modifications, which include additional Python code to provide a command-line interface (CLI) for executing functions, are made solely for educational and research purposes in accordance with the terms of the original license. All rights in the original software and associated technologies are reserved by the Regents of the University of Minnesota. These modifications are not intended for sale or redistribution without prior approval from the copyright holders.
+## Modifications by SungHo Lee
+- Modifier: SungHo Lee (shlee@unc.edu), University of North Carolina at Chapel Hill.
+- Nature of Modifications: Ported to pure Python module and a command-line interface (CLI).
+- Purpose: Modifications are made solely for educational and research purposes, in line with the original license terms.
+- Rights and Redistribution: Rights in the original software are reserved by the Regents of the University of Minnesota. The modified software is not intended for sale or redistribution without prior approval from the copyright holders.
