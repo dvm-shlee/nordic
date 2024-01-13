@@ -1,17 +1,32 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools >= 61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "nordic"
-version = "0.1.0"
-description = "Python port of NORDIC"
-authors = [{name = "SungHo Lee"}]
-license = "MIT"
+dynamic = ["version"]
+description = "Python library and CLI of NORDIC MRI denoising"
+authors = [{name = "SungHo Lee", email = "shlee@unc.edu"}]
+license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.6"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+    "numpy",
+    "scipy"
+]
+
+[project.scripts]
+nordic = "nordic.__init__:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "nordic.__version__"}

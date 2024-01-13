@@ -1,8 +1,8 @@
 import numpy as np
-from .patch_utils import get_2d_slicer
+from .utils import get_2d_slicer
 from scipy.signal import get_window
 from numpy.fft import fftn, ifftn, fftshift, ifftshift
-from typing import Tuple, List, Optional
+from typing import Tuple, Optional
 
 
 def get_2d_slicer(data_shape: Tuple[int, int, int, Optional[int]], 

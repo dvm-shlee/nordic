@@ -1,6 +1,8 @@
 import numpy as np
+from typing import Optional, Union, Tuple
 
-def thr_est_mppca(S: np.ndarray, M: int, N: int, demeaned: bool = True, return_noise: bool = False):
+
+def thr_est_mppca(S: np.ndarray, M: int, N: int, demeaned: bool = True, return_noise: bool = False) -> Union[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
     """
     Estimates the threshold for denoising using the MPPCA method.
 
@@ -35,27 +37,31 @@ def thr_est_mppca(S: np.ndarray, M: int, N: int, demeaned: bool = True, return_n
     
     rangeMP = 4*np.sqrt(gamma[:])
     rangeData = vals[:N-centering]-vals[N-centering-1]
-    sigmasq_2 = rangeData/rangeMP
     t = np.where(sigmasq_2 < sigmasq_1)
+    sigmasq_2 = rangeData/rangeMP
     thr_idx = t[0][0]
     
     return (S[thr_idx], sigmasq_2[thr_idx]) if return_noise else S[thr_idx]
 
 
-def thr_est_nordic(noise, M, N, scale=1, niter=100):
+def thr_est_nordic(noise: Optional[np.ndarray], M: int, N: int, scale: float=1, niter: int=100) -> float:
     """
     threshold estimation proposed by NORDIC denoising method
 
     Parameters:
-        noise: noise signal
+        noise (ndarray, optional): Noise signal. If not provided or None, the noise standard deviation is assumed to be 1
         M(int): number of voxels, M must larger than N
         N(int): number of frames, correspond to R (rank)
-        scale: scaling factor for noise threshold
-
+        scale (int): scaling factor for noise threshold
+        niter (int): Number of iterations for Monte-Carlo simulation.
+        
     Returns:
         sigma: noise level (threshold level of singular value)
     """
-    noise_std = np.std(np.real(noise[noise != 0]))
+    if noise is None or not isinstance(noise, np.ndarray):
+        noise_std = 1
+    else:
+        noise_std = np.std(np.real(noise[noise != 0]))
 
     sigma = 0
     # Monte-Carlo simulation

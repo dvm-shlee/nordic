@@ -2,6 +2,28 @@ from typing import Tuple, List
 import numpy as np
 
 
+def absolute_scale(input_data):
+    """
+    Normalizes the scale of the input data by dividing it with the minimum non-zero value.
+
+    Args:
+        input_data (ndarray): The input data to be scaled.
+
+    Returns:
+        tuple: A tuple containing the scaled data and the absolute scale.
+
+    Examples:
+        >>> input_data = np.random.rand(100, 100)
+        >>> absolute_scale(input_data)
+        (array([...]), 0.123)
+    """
+    data = input_data.copy()
+    # normalize scale
+    abs_scale = data[data != 0].min()
+    data /= abs_scale
+    return data, abs_scale
+
+
 def get_patch_coords(data: np.ndarray, 
                      patch_dim: Tuple[int, int, int], 
                      overlap_factor: int) -> List[Tuple[int, int, int]]:
@@ -146,3 +168,31 @@ def get_casorati_matrix(data: np.ndarray,
     """
     xs, ys, zs = get_patch_slicers(coord, patch_dim)
     return data[xs, ys, zs, :].reshape([np.prod(patch_dim), data.shape[-1]])
+
+
+def prep_llr_process(input_data, gamma, overlap_factor):
+    """
+    Prepares the input data for the LLR (Local Low-Rank) process by normalizing the scale, determining the patch dimensions, and calculating the patch coordinates.
+
+    Args:
+        input_data (ndarray): The input data to be prepared.
+        gamma (float or list or tuple): The regularization parameter or patch dimensions.
+        overlap_factor (float): The overlap factor for patch extraction.
+
+    Returns:
+        tuple: A tuple containing the patch dimensions, and patch coordinates.
+
+    Examples:
+        >>> input_data = np.random.rand(100, 100)
+        >>> gamma = 0.1
+        >>> overlap_factor = 0.5
+        >>> prep_llr_process(input_data, gamma, overlap_factor)
+        (array([...]), 0.123, (8, 8), [(0, 0), (0, 8), ...])
+    """
+    data = input_data.copy()
+    if isinstance(gamma, (list, tuple)):
+        patch_dim = gamma
+    else:
+        patch_dim = get_patch_dim(data, gamma)
+    patch_coords = get_patch_coords(data, patch_dim, overlap_factor)
+    return patch_dim, patch_coords
